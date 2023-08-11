@@ -8,9 +8,16 @@ load_dotenv()
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = False
+DEBUG = os.getenv('DEBUG', default='false')
 
-ALLOWED_HOSTS = ['130.193.55.153', '127.0.0.1', 'localhost', 'kittygram59.ddns.net']
+if DEBUG.lower() == 'true':
+    # Действия для режима отладки
+    print("Debug mode is active.")
+else:
+    # Дествия для нормального режима работы
+    print("Normal mode.")
+
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
