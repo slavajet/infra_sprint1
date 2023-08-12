@@ -1,5 +1,7 @@
 import os
+from distutils.util import strtobool
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,13 +10,13 @@ load_dotenv()
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = os.getenv('DEBUG', default='false')
+DEBUG = bool(strtobool(os.getenv('DEBUG', 'False')))
 
-if DEBUG.lower() == 'true':
+if DEBUG:
     # Действия для режима отладки
     print("Debug mode is active.")
 else:
-    # Дествия для нормального режима работы
+    # Действия для нормального режима работы
     print("Normal mode.")
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
